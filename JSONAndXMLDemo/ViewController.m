@@ -213,13 +213,18 @@
 -(void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict{
     
     // If the current element name is equal to "geoname" then initialize the temporary dictionary.
-    if ([elementName isEqualToString:@"geoname"]) {
+    if
+        ([elementName isEqualToString:@"geoname"]) {
         self.dictTempDataStorage = [[NSMutableDictionary alloc] init];
     }
     
     // Keep the current element.
     self.currentElement = elementName;
 }
+
+
+#pragma mark - XML delegate
+
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     
     if ([elementName isEqualToString:@"geoname"]) {
