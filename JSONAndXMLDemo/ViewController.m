@@ -149,8 +149,7 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
+#pragma mark - JSON Parsing
 -(void)getDictionaryFromJSON{
     // Prepare the URL that we'll get the country info data from.
     NSString *URLString = [NSString stringWithFormat:@"http://api.geonames.org/countryInfoJSON?username=%@&country=%@", kUsername, self.countryCode];
@@ -175,7 +174,7 @@
     
 }
 
-
+#pragma mark - XML Parsing
 -(void)getDictionaryFromXML{
     // Prepare the URL that we'll get the neighbour countries from.
     NSString *URLString = [NSString stringWithFormat:@"http://api.geonames.org/neighbours?geonameId=1282588&username=%@",  kUsername];
@@ -198,6 +197,10 @@
     }];
 }
 
+
+#pragma mark - XML delegate
+
+
 -(void)parserDidStartDocument:(NSXMLParser *)parser{
     // Initialize the neighbours data array.
     self.arrNeighboursData = [[NSMutableArray alloc] init];
@@ -205,6 +208,7 @@
 
 -(void)parserDidEndDocument:(NSXMLParser *)parser{
     // When the parsing has been finished then simply reload the table view.
+    //UI changes
 }
 
 -(void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError{
@@ -221,9 +225,6 @@
     // Keep the current element.
     self.currentElement = elementName;
 }
-
-
-#pragma mark - XML delegate
 
 -(void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName{
     
